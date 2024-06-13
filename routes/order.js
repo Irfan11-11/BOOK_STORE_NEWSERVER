@@ -13,7 +13,7 @@ router.post("/place-order", authenticateToken, async (req, res) => {
     try {
         const { id } = req.headers;
         const Auser = await User.findById(id);
-        const stripe = new Stripe("sk_test_51PQAowP8CwTqmG4FhxZvDQLaNFpX9L7PX4Pu8eXMrvDzjfv3jZEO8yAIv2xWXAjgb6kASuidJlsiQX23hykh4NEM00NEunaKhC");
+        const stripe = new Stripe(process.env.Stripe_SECRET_KEY);
         const { order, ticketPrice } = req.body;
 
         const session = await stripe.checkout.sessions.create({
